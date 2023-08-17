@@ -7,6 +7,7 @@ PACKAGE_NAME='zenoh-ros-type'
 VERSION='0.1.0'
 DESCRIPTION='Common class for ROS 2 message used by Zenoh'
 AUTHOR='ChenYing Kuo'
+LICENSE='Apache-2.0'
 EMAIL='evshary@gmail.com'
 URL='https://github.com/evshary/zenoh-ros-type-python'
 
@@ -17,6 +18,7 @@ setup(name=PACKAGE_NAME,
       version=VERSION,
       description=DESCRIPTION,
       author=AUTHOR,
+      license=LICENSE,
       author_email=EMAIL,
       url=URL,
       install_requires=REQUIREMENTS_PKG,
