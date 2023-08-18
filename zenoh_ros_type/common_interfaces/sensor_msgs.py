@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pycdr2 import IdlStruct, Enum
-from pycdr2.types import str, int8, uint8, uint16, uint32, float64, sequence, array
+from pycdr2.types import int8, uint8, uint16, uint32, float64, sequence, array
 from std_msgs import Header
 from geometry_msgs import Quaternion, Vector3
 

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pycdr2 import IdlStruct
-from pycdr2.types import str, float32
+from pycdr2.types import float32
 from ..rcl_interfaces.builtin_interfaces import Time
 
 @dataclass
