@@ -1,0 +1,16 @@
+from dataclasses import dataclass
+from pycdr2 import IdlStruct
+from pycdr2.types import str, float32
+from ..rcl_interfaces.builtin_interfaces import Time
+
+@dataclass
+class Header(IdlStruct, typename="Header"):
+    stamp: Time
+    frame_id: str
+
+@dataclass
+class ColorRGBA(IdlStruct, typename="ColorRGBA"):
+    r: float32
+    g: float32
+    b: float32
+    a: float32
