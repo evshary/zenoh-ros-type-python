@@ -31,3 +31,8 @@ class Vector3(IdlStruct, typename="Vector3"):
     x: float64
     y: float64
     z: float64
+
+@dataclass
+class Twist(IdlStruct, typename="Twist"):
+    linear: Vector3
+    angular: Vector3

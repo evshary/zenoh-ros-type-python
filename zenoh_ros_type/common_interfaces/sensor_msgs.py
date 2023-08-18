@@ -18,10 +18,10 @@ class CameraInfo(IdlStruct, typename="CameraInfo"):
     height: uint32
     width: uint32
     distortion_model: str
-    d: sequence(float64)
-    k: array(float64, 9)
-    r: array(float64, 9)
-    p: array(float64, 12)
+    d: sequence[float64]
+    k: array[float64, 9]
+    r: array[float64, 9]
+    p: array[float64, 12]
     binning_x: uint32
     binning_y: uint32
     roi: RegionOfInterest
@@ -34,17 +34,17 @@ class Image(IdlStruct, typename="Image"):
     encoding: str
     is_bigendian: uint8
     step: uint32
-    data: sequence(uint8)
+    data: sequence[uint8]
 
 @dataclass
 class IMU(IdlStruct, typename="IMU"):
     header: Header
     orientation: Quaternion
-    orientation_covariance: array(float64, 9)
+    orientation_covariance: array[float64, 9]
     angular_velocity: Vector3
-    angular_velocity_covariance: array(float64, 9)
+    angular_velocity_covariance: array[float64, 9]
     linear_acceleration: Vector3
-    linear_acceleration_covariance: array(float64, 9)
+    linear_acceleration_covariance: array[float64, 9]
 
 @dataclass
 class NavSatStatus(IdlStruct, typename="NavSatStatus"):
@@ -68,7 +68,7 @@ class NavSatFix(IdlStruct, typename="NavSatFix"):
     latitude: float64
     longitude: float64
     altitude: float64
-    position_covariance: array(float64, 9)
+    position_covariance: array[float64, 9]
     class POSITION_COVARIANCE_TYPE(Enum):
         UNKNOWN = 0
         APPROXIMATED = 1
@@ -97,9 +97,9 @@ class PointCloud2(IdlStruct, typename="PointCloud2"):
     header: Header
     height: uint32
     width: uint32
-    fields: sequence(PointField)
+    fields: sequence[PointField]
     is_bigendian: bool
     point_step: uint32
     row_step: uint32
-    data: sequence(uint8)
+    data: sequence[uint8]
     is_dense: bool
