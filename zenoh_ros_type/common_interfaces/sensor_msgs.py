@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from pycdr2 import IdlStruct, Enum
 from pycdr2.types import int8, uint8, uint16, uint32, float64, sequence, array
-from std_msgs import Header
-from geometry_msgs import Quaternion, Vector3
+from .std_msgs import Header
+from .geometry_msgs import Quaternion, Vector3
 
 @dataclass
 class RegionOfInterest(IdlStruct, typename="RegionOfInterest"):
