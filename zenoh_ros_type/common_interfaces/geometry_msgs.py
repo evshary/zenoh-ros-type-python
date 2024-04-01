@@ -16,14 +16,14 @@ class Point32(IdlStruct, typename="Point32"):
 
 @dataclass
 class Quaternion(IdlStruct, typename="Quaternion"):
-    x: float32
-    y: float32
-    z: float32
-    w: float32
+    x: float64
+    y: float64
+    z: float64
+    w: float64
 
 @dataclass
 class Pose(IdlStruct, typename="Pose"):
-    postion: Point
+    position: Point
     orientation: Quaternion
 
 @dataclass
