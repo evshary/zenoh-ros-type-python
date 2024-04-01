@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+from pycdr2 import IdlStruct
 from pycdr2.types import float64
 from ..common_interfaces.std_msgs import Header
 

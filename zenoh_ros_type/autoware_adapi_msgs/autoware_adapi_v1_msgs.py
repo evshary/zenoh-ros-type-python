@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+from pycdr2 import IdlStruct
 from ..geographic_info.geographic_msgs import GeoPointStamped
 from ..common_interfaces.geometry_msgs import PoseWithCovarianceStamped, TwistWithCovarianceStamped, AccelWithCovarianceStamped
 
