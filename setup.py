@@ -4,7 +4,7 @@ import pathlib
 ROOT_DIR = pathlib.Path(__file__).parent.resolve()
 
 PACKAGE_NAME='zenoh-ros-type'
-VERSION='0.2.0'
+VERSION='0.2.1'
 DESCRIPTION='Common class for ROS 2 message used by Zenoh'
 LONG_DESCRIPTION = (ROOT_DIR / "README.md").read_text(encoding="utf8")
 LONG_DESC_TYPE = "text/markdown"
