@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pycdr2 import IdlStruct, Enum
+from pycdr2.types import uint16
 from ..geographic_info.geographic_msgs import GeoPointStamped
 from ..common_interfaces.geometry_msgs import PoseWithCovarianceStamped, TwistWithCovarianceStamped, AccelWithCovarianceStamped
 
@@ -25,7 +26,7 @@ class ResponseStatus(IdlStruct, typename="ResponseStatus"):
         NO_EFFECT = 60001
 
     success: bool
-    code: int
+    code: uint16
     message: str
 
 @dataclass
