@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from pycdr2 import IdlStruct, Enum
-from pycdr2.types import uint16
+from pycdr2.types import uint16, int64, sequence
 from ..geographic_info.geographic_msgs import GeoPointStamped
-from ..common_interfaces.geometry_msgs import PoseWithCovarianceStamped, TwistWithCovarianceStamped, AccelWithCovarianceStamped
+from ..common_interfaces.std_msgs import Header
+from ..common_interfaces.geometry_msgs import PoseWithCovarianceStamped, TwistWithCovarianceStamped, AccelWithCovarianceStamped, Pose
 
 @dataclass
 class VehicleKinematics(IdlStruct, typename="VehicleKinematics"):
@@ -32,3 +33,24 @@ class ResponseStatus(IdlStruct, typename="ResponseStatus"):
 @dataclass
 class ChangeOperationMode(IdlStruct, typename="ChangeOperationMode"):
     status: ResponseStatus
+
+@dataclass
+class RoutePrimitive(IdlStruct, typename="RoutePrimitive"):
+    id: int64
+    type: str
+
+@dataclass
+class RouteSegment(IdlStruct, typename="RouteSegment"):
+    preferred: RoutePrimitive
+    alternatives: sequence[RoutePrimitive]
+
+@dataclass
+class RouteData(IdlStruct, typename="RouteData"):
+    start: Pose
+    goal: Pose
+    segments: sequence[RouteSegment]
+
+@dataclass
+class Route(IdlStruct, typename="Route"):
+    header: Header
+    data: sequence[RouteData]
