@@ -31,7 +31,7 @@ class ResponseStatus(IdlStruct, typename="ResponseStatus"):
     message: str
 
 @dataclass
-class ChangeOperationMode(IdlStruct, typename="ChangeOperationMode"):
+class ChangeOperationMode_Response(IdlStruct, typename="ChangeOperationMode_Response"):
     status: ResponseStatus
 
 @dataclass
