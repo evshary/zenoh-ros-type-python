@@ -54,3 +54,22 @@ class RouteData(IdlStruct, typename="RouteData"):
 class Route(IdlStruct, typename="Route"):
     header: Header
     data: sequence[RouteData]
+
+@dataclass
+class RouteOption(IdlStruct, typename="RouteOption"):
+    allow_goal_modification: bool
+
+@dataclass
+class SetRoutePoints_Request(IdlStruct, typename="SetRoutePoints_Request"):
+    header: Header
+    option: RouteOption
+    goal: Pose
+    waypoints: sequence[Pose]
+
+@dataclass
+class SetRoutePoints_Response(IdlStruct, typename="SetRoutePoints_Response"):
+    status: ResponseStatus
+    
+@dataclass
+class ClearRoute_Response(IdlStruct, typename="ClearRoute_Response"):
+    status: ResponseStatus
