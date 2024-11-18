@@ -31,7 +31,7 @@ class ResponseStatus(IdlStruct, typename="ResponseStatus"):
     message: str
 
 @dataclass
-class ChangeOperationMode_Response(IdlStruct, typename="ChangeOperationMode_Response"):
+class ChangeOperationModeResponse(IdlStruct, typename="ChangeOperationModeResponse"):
     status: ResponseStatus
 
 @dataclass
@@ -60,16 +60,16 @@ class RouteOption(IdlStruct, typename="RouteOption"):
     allow_goal_modification: bool
 
 @dataclass
-class SetRoutePoints_Request(IdlStruct, typename="SetRoutePoints_Request"):
+class SetRoutePointsRequest(IdlStruct, typename="SetRoutePointsRequest"):
     header: Header
     option: RouteOption
     goal: Pose
     waypoints: sequence[Pose]
 
 @dataclass
-class SetRoutePoints_Response(IdlStruct, typename="SetRoutePoints_Response"):
+class SetRoutePointsResponse(IdlStruct, typename="SetRoutePointsResponse"):
     status: ResponseStatus
     
 @dataclass
-class ClearRoute_Response(IdlStruct, typename="ClearRoute_Response"):
+class ClearRouteResponse(IdlStruct, typename="ClearRouteResponse"):
     status: ResponseStatus
