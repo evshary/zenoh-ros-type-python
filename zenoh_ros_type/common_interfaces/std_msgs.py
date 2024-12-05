@@ -14,3 +14,7 @@ class ColorRGBA(IdlStruct, typename="ColorRGBA"):
     g: float32
     b: float32
     a: float32
+
+@dataclass
+class String(IdlStruct, typename="String"):
+    data: str
