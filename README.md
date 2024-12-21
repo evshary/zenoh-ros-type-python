@@ -11,10 +11,18 @@ The messages come from:
 * [autoware_adapi_msgs](https://github.com/autowarefoundation/autoware_adapi_msgs): messages used in Autoware
 * [geographic_info](https://github.com/ros-geographic-info/geographic_info/tree/master): ROS geographic information project
 
-# Usage
+## Usage
 
 You can download the packages via [PyPI](https://pypi.org/project/zenoh-ros-type/).
 
 ```shell
 python3 -m pip install zenoh-ros-type
+```
+
+## For developers
+
+* Install pre-commit hook
+
+```shell
+pre-commit install --install-hooks
 ```
