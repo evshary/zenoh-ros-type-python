@@ -1,1 +1,1 @@
-from . geographic_msgs import *
+from .geographic_msgs import *  # NOQA

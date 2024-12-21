@@ -1,1 +1,1 @@
-from .autoware_control_msgs import *
+from .autoware_control_msgs import *  # NOQA
