@@ -1,4 +1,6 @@
 upload:
+    # Clean the old dist
+    rm -rf dist
     # Build packages
     poetry run python3 -m pip install --upgrade build
     poetry run python3 -m build
