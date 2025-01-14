@@ -1,0 +1,21 @@
+[project]
+name = "zenoh-ros-type-python"
+version = "0.2.2"
+description = "Common class for ROS 2 message used by Zenoh"
+authors = [
+    {name = "ChenYing Kuo",email = "evshary@gmail.com"}
+]
+license = "Apache-2.0"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pycdr2 (>=1.0,<2.0)"
+]
+
+[project.urls]
+repository = "https://github.com/evshary/zenoh-ros-type-python"
+Issues = "https://github.com/evshary/zenoh-ros-type-python/issues"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
