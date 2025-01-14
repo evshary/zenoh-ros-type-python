@@ -1,3 +1,7 @@
+# Upload needed
 build
 dist
 zenoh_ros_type.egg-info/
+
+# Python cache
+__pycache__

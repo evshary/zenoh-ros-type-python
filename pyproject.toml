@@ -1,5 +1,5 @@
 [project]
-name = "zenoh-ros-type-python"
+name = "zenoh-ros-type"
 version = "0.2.2"
 description = "Common class for ROS 2 message used by Zenoh"
 authors = [
@@ -17,5 +17,18 @@ repository = "https://github.com/evshary/zenoh-ros-type-python"
 Issues = "https://github.com/evshary/zenoh-ros-type-python/issues"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.poetry.group.dev.dependencies]
+eclipse-zenoh = "^1.1.0"
+
+# Ruff
+[tool.ruff]
+line-length = 150
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.ruff.format]
+quote-style = "single"
