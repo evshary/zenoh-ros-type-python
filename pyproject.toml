@@ -5,7 +5,7 @@ description = "Common class for ROS 2 message used by Zenoh"
 authors = [
     {name = "ChenYing Kuo",email = "evshary@gmail.com"}
 ]
-license = "Apache-2.0"
+license = {text = "Apache-2.0"}
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

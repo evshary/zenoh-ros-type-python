@@ -3,5 +3,8 @@ build
 dist
 zenoh_ros_type.egg-info/
 
+# Virtual env
+.venv
+
 # Python cache
 __pycache__
