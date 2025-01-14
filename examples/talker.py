@@ -1,10 +1,12 @@
 import time
+
 import zenoh
+
 from zenoh_ros_type import String
 
 
 def main():
-    key = "chatter"
+    key = 'chatter'
 
     conf = zenoh.Config()
     with zenoh.open(conf) as session:
@@ -13,8 +15,8 @@ def main():
         cnt = 0
         try:
             while True:
-                data = f"Hello World {cnt}!"
-                print(f"Publish: {data}")
+                data = f'Hello World {cnt}!'
+                print(f'Publish: {data}')
                 msg = String(data=data)
                 publisher.put(msg.serialize())
 
@@ -24,5 +26,5 @@ def main():
             pass
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

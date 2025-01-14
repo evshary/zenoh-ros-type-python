@@ -1,19 +1,23 @@
 from dataclasses import dataclass
-from pycdr2 import IdlStruct, Enum
-from pycdr2.types import int8, uint8, uint16, uint32, float64, sequence, array
-from .std_msgs import Header
+
+from pycdr2 import Enum, IdlStruct
+from pycdr2.types import array, float64, int8, sequence, uint8, uint16, uint32
+
 from .geometry_msgs import Quaternion, Vector3
+from .std_msgs import Header
+
 
 @dataclass
-class RegionOfInterest(IdlStruct, typename="RegionOfInterest"):
+class RegionOfInterest(IdlStruct, typename='RegionOfInterest'):
     x_offset: uint32
     y_offset: uint32
     height: uint32
     width: uint32
     do_rectify: bool
 
+
 @dataclass
-class CameraInfo(IdlStruct, typename="CameraInfo"):
+class CameraInfo(IdlStruct, typename='CameraInfo'):
     header: Header
     height: uint32
     width: uint32
@@ -26,8 +30,9 @@ class CameraInfo(IdlStruct, typename="CameraInfo"):
     binning_y: uint32
     roi: RegionOfInterest
 
+
 @dataclass
-class Image(IdlStruct, typename="Image"):
+class Image(IdlStruct, typename='Image'):
     header: Header
     height: uint32
     width: uint32
@@ -36,8 +41,9 @@ class Image(IdlStruct, typename="Image"):
     step: uint32
     data: sequence[uint8]
 
+
 @dataclass
-class IMU(IdlStruct, typename="IMU"):
+class IMU(IdlStruct, typename='IMU'):
     header: Header
     orientation: Quaternion
     orientation_covariance: array[float64, 9]
@@ -46,40 +52,49 @@ class IMU(IdlStruct, typename="IMU"):
     linear_acceleration: Vector3
     linear_acceleration_covariance: array[float64, 9]
 
+
 @dataclass
-class NavSatStatus(IdlStruct, typename="NavSatStatus"):
+class NavSatStatus(IdlStruct, typename='NavSatStatus'):
     class STATUS(Enum):
-        NO_FIX = -1 # unable to fix position
-        FIX = 0 # unaugmented fix
-        SBAS_FIX = 1 # with satellite-based augmentation
-        GBAS_FIX = 2 # with ground-based augmentation
+        NO_FIX = -1  # unable to fix position
+        FIX = 0  # unaugmented fix
+        SBAS_FIX = 1  # with satellite-based augmentation
+        GBAS_FIX = 2  # with ground-based augmentation
+
     status: int8
+
     class SERVICE(Enum):
         GPS = 1
         GLONASS = 2
-        COMPASS = 4 # includes BeiDou
+        COMPASS = 4  # includes BeiDou
         GALILEO = 8
+
     service: uint16
 
+
 @dataclass
-class NavSatFix(IdlStruct, typename="NavSatFix"):
+class NavSatFix(IdlStruct, typename='NavSatFix'):
     header: Header
     status: NavSatStatus
     latitude: float64
     longitude: float64
     altitude: float64
     position_covariance: array[float64, 9]
+
     class POSITION_COVARIANCE_TYPE(Enum):
         UNKNOWN = 0
         APPROXIMATED = 1
         DIAGONAL_KNOWN = 2
         KNOWN = 3
+
     position_covariance_type: uint8
 
+
 @dataclass
-class PointField(IdlStruct, typename="PointField"):
+class PointField(IdlStruct, typename='PointField'):
     name: str
     offset: uint32
+
     class DATA_TYPE(Enum):
         INT8 = 1
         UINT8 = 2
@@ -89,11 +104,13 @@ class PointField(IdlStruct, typename="PointField"):
         UINT32 = 6
         FLOAT32 = 7
         FLOAT64 = 8
+
     datatype: uint8
     count: uint32
 
+
 @dataclass
-class PointCloud2(IdlStruct, typename="PointCloud2"):
+class PointCloud2(IdlStruct, typename='PointCloud2'):
     header: Header
     height: uint32
     width: uint32
