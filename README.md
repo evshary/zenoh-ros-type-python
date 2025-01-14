@@ -19,6 +19,14 @@ You can download the packages via [PyPI](https://pypi.org/project/zenoh-ros-type
 python3 -m pip install zenoh-ros-type
 ```
 
+## Examples
+
+You can check the examples folder for the basic usage.
+Also, there are some examples for how to use zenoh-ros-type-python in your application.
+
+* [zenoh_autoware_fms](https://github.com/evshary/zenoh_autoware_fms): Fleet management system prototype of Autoware based on Zenoh.
+* [zenoh_autoware_v2x](https://github.com/evshary/zenoh_autoware_v2x): Integrate the autonomous system between multiple vehicles and the traffic light manager with zenoh.
+
 ## For developers
 
 * Install pre-commit hook
