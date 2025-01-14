@@ -1,19 +1,23 @@
 from dataclasses import dataclass
-from pycdr2 import IdlStruct, Enum
-from pycdr2.types import uint16, int64, sequence
-from ..geographic_info.geographic_msgs import GeoPointStamped
+
+from pycdr2 import Enum, IdlStruct
+from pycdr2.types import int64, sequence, uint16
+
+from ..common_interfaces.geometry_msgs import AccelWithCovarianceStamped, Pose, PoseWithCovarianceStamped, TwistWithCovarianceStamped
 from ..common_interfaces.std_msgs import Header
-from ..common_interfaces.geometry_msgs import PoseWithCovarianceStamped, TwistWithCovarianceStamped, AccelWithCovarianceStamped, Pose
+from ..geographic_info.geographic_msgs import GeoPointStamped
+
 
 @dataclass
-class VehicleKinematics(IdlStruct, typename="VehicleKinematics"):
+class VehicleKinematics(IdlStruct, typename='VehicleKinematics'):
     geographic_pose: GeoPointStamped
     pose: PoseWithCovarianceStamped
     twist: TwistWithCovarianceStamped
     accel: AccelWithCovarianceStamped
 
+
 @dataclass
-class ResponseStatus(IdlStruct, typename="ResponseStatus"):
+class ResponseStatus(IdlStruct, typename='ResponseStatus'):
     class CODE(Enum):
         # Error codes
         UNKNOWN = 50000
@@ -30,46 +34,55 @@ class ResponseStatus(IdlStruct, typename="ResponseStatus"):
     code: uint16
     message: str
 
-@dataclass
-class ChangeOperationModeResponse(IdlStruct, typename="ChangeOperationModeResponse"):
-    status: ResponseStatus
 
 @dataclass
-class RoutePrimitive(IdlStruct, typename="RoutePrimitive"):
+class ChangeOperationModeResponse(IdlStruct, typename='ChangeOperationModeResponse'):
+    status: ResponseStatus
+
+
+@dataclass
+class RoutePrimitive(IdlStruct, typename='RoutePrimitive'):
     id: int64
     type: str
 
+
 @dataclass
-class RouteSegment(IdlStruct, typename="RouteSegment"):
+class RouteSegment(IdlStruct, typename='RouteSegment'):
     preferred: RoutePrimitive
     alternatives: sequence[RoutePrimitive]
 
+
 @dataclass
-class RouteData(IdlStruct, typename="RouteData"):
+class RouteData(IdlStruct, typename='RouteData'):
     start: Pose
     goal: Pose
     segments: sequence[RouteSegment]
 
+
 @dataclass
-class Route(IdlStruct, typename="Route"):
+class Route(IdlStruct, typename='Route'):
     header: Header
     data: sequence[RouteData]
 
-@dataclass
-class RouteOption(IdlStruct, typename="RouteOption"):
-    allow_goal_modification: bool
 
 @dataclass
-class SetRoutePointsRequest(IdlStruct, typename="SetRoutePointsRequest"):
+class RouteOption(IdlStruct, typename='RouteOption'):
+    allow_goal_modification: bool
+
+
+@dataclass
+class SetRoutePointsRequest(IdlStruct, typename='SetRoutePointsRequest'):
     header: Header
     option: RouteOption
     goal: Pose
     waypoints: sequence[Pose]
 
+
 @dataclass
-class SetRoutePointsResponse(IdlStruct, typename="SetRoutePointsResponse"):
+class SetRoutePointsResponse(IdlStruct, typename='SetRoutePointsResponse'):
     status: ResponseStatus
-    
+
+
 @dataclass
-class ClearRouteResponse(IdlStruct, typename="ClearRouteResponse"):
+class ClearRouteResponse(IdlStruct, typename='ClearRouteResponse'):
     status: ResponseStatus
