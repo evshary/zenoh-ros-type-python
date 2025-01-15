@@ -52,18 +52,24 @@ def main():
         # Send goal request
         goal_id = uuid4().bytes  # Generate a random UUID
         req = FibonacciSendGoal(goal_id=UUID(uuid=goal_id), goal=10)
-        recv_handler = send_goal_client.get(payload=req.serialize())
-        reply_sample = recv_handler.recv()
-        reply = ActionSendGoalResponse.deserialize(reply_sample.ok.payload.to_bytes())
-        print(f'The result of SendGoal: {reply.accept}')
+        try:
+            recv_handler = send_goal_client.get(payload=req.serialize())
+            reply_sample = recv_handler.recv()
+            reply = ActionSendGoalResponse.deserialize(reply_sample.ok.payload.to_bytes())
+            print(f'The result of SendGoal: {reply.accept}')
+        except Exception as e:
+            print(f'Error occurred: {e}')
 
         # # Cancel goal client
         # req = CancelGoalRequest(goal_info=GoalInfo(goal_id=UUID(uuid=goal_id), stamp=Time(sec=0, nanosec=0)))
-        # recv_handler = cancel_goal_client.get(payload=req.serialize())
-        # reply_sample = recv_handler.recv()
-        # reply = CancelGoalResponse.deserialize(reply_sample.ok.payload.to_bytes())
-        # for goal in reply.goals_canceling:
-        #     print(f'Cancel {goal.goal_id.uuid.hex()}: {reply.return_code}')
+        # try:
+        #     recv_handler = cancel_goal_client.get(payload=req.serialize())
+        #     reply_sample = recv_handler.recv()
+        #     reply = CancelGoalResponse.deserialize(reply_sample.ok.payload.to_bytes())
+        #     for goal in reply.goals_canceling:
+        #         print(f'Cancel {goal.goal_id.uuid.hex()}: {reply.return_code}')
+        # except Exception as e:
+        #     print(f'Error occurred: {e}')
 
         # Wait for the result
         time.sleep(10)
@@ -71,9 +77,12 @@ def main():
         # Get result client
         req = ActionResultRequest(goal_id=UUID(uuid=goal_id))
         recv_handler = get_result_client.get(payload=req.serialize())
-        reply_sample = recv_handler.recv()
-        reply = FibonacciResult.deserialize(reply_sample.ok.payload.to_bytes())
-        print(f'The result: {reply.status} {reply.sequence}')
+        try:
+            reply_sample = recv_handler.recv()
+            reply = FibonacciResult.deserialize(reply_sample.ok.payload.to_bytes())
+            print(f'The result: {reply.status} {reply.sequence}')
+        except Exception as e:
+            print(f'Error occurred: {e}')
 
 
 if __name__ == '__main__':
