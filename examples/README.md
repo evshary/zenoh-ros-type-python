@@ -47,3 +47,15 @@ python3 service_server.py
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 ros2 run demo_nodes_cpp add_two_ints_client
 ```
+
+## Action client
+
+```bash
+# Run bridge
+zenoh-bridge-ros2dds
+# ROS (Need to switch to CycloneDDS or it can't work)
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+ros2 run action_tutorials_cpp fibonacci_action_server
+# Zenoh
+python3 action_client.py
+```
