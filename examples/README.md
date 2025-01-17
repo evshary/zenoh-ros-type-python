@@ -59,3 +59,16 @@ ros2 run action_tutorials_cpp fibonacci_action_server
 # Zenoh
 python3 action_client.py
 ```
+
+## Action server
+
+```bash
+# Run bridge
+zenoh-bridge-ros2dds
+# Zenoh
+python3 action_server.py
+# ROS (Need to switch to CycloneDDS or it can't work)
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+ros2 run action_tutorials_cpp fibonacci_action_client
+
+```
