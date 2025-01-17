@@ -34,17 +34,6 @@ class GoalStatusArray(IdlStruct, typename='GoalStatusArray'):
 
 
 @dataclass
-class ActionSendGoalResponse(IdlStruct, typename='ActionSendGoalResponse'):
-    accept: bool
-    timestamp: Time
-
-
-@dataclass
-class ActionResultRequest(IdlStruct, typename='ActionResultRequest'):
-    goal_id: UUID
-
-
-@dataclass
 class CancelGoalRequest(IdlStruct, typename='CancelGoalRequest'):
     goal_info: GoalInfo
 
