@@ -1,6 +1,6 @@
 [project]
 name = "zenoh-ros-type"
-version = "0.2.3"
+version = "0.2.4"
 description = "Common class for ROS 2 message used by Zenoh"
 authors = [
     {name = "ChenYing Kuo",email = "evshary@gmail.com"}
@@ -21,7 +21,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.poetry.group.dev.dependencies]
-eclipse-zenoh = "^1.1.0"
+eclipse-zenoh = "^1.7.1"
 
 # Ruff
 [tool.ruff]
