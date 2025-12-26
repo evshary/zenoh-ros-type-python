@@ -7,9 +7,8 @@ from ..rcl_interfaces.builtin_interfaces import Time
 
 
 @dataclass
-class Header(IdlStruct, typename='Header'):
-    stamp: Time
-    frame_id: str
+class Bool(IdlStruct, typename='Bool'):
+    data: bool
 
 
 @dataclass
@@ -18,6 +17,12 @@ class ColorRGBA(IdlStruct, typename='ColorRGBA'):
     g: float32
     b: float32
     a: float32
+
+
+@dataclass
+class Header(IdlStruct, typename='Header'):
+    stamp: Time
+    frame_id: str
 
 
 @dataclass
