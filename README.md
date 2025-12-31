@@ -19,6 +19,8 @@ You can download the packages via [PyPI](https://pypi.org/project/zenoh-ros-type
 python3 -m pip install zenoh-ros-type
 ```
 
+Then you can run `import zenoh_ros_type` in your code.
+
 ## Examples
 
 You can check the examples folder for the basic usage.

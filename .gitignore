@@ -8,3 +8,6 @@ zenoh_ros_type.egg-info/
 
 # Python cache
 __pycache__
+
+# Ruff
+.ruff_cache
