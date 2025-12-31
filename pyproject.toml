@@ -1,6 +1,6 @@
 [project]
 name = "zenoh-ros-type"
-version = "0.2.4"
+version = "0.2.5"
 description = "Common class for ROS 2 message used by Zenoh"
 authors = [
     {name = "ChenYing Kuo", email = "evshary@gmail.com"}
