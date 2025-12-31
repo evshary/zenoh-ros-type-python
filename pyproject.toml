@@ -3,13 +3,13 @@ name = "zenoh-ros-type"
 version = "0.2.4"
 description = "Common class for ROS 2 message used by Zenoh"
 authors = [
-    {name = "ChenYing Kuo",email = "evshary@gmail.com"}
+    {name = "ChenYing Kuo", email = "evshary@gmail.com"}
 ]
 license = {text = "Apache-2.0"}
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
-    "pycdr2 (>=1.0,<2.0)"
+    "pycdr2>=1.0,<2.0"
 ]
 
 [project.urls]
@@ -20,8 +20,10 @@ Issues = "https://github.com/evshary/zenoh-ros-type-python/issues"
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.poetry.group.dev.dependencies]
-eclipse-zenoh = "^1.7.1"
+[project.optional-dependencies]
+dev = [
+  "eclipse-zenoh>=1.7.1,<2.0",
+]
 
 # Ruff
 [tool.ruff]

@@ -1,0 +1,68 @@
+version = 1
+revision = 3
+requires-python = ">=3.8"
+resolution-markers = [
+    "python_full_version >= '3.9'",
+    "python_full_version < '3.9'",
+]
+
+[[package]]
+name = "eclipse-zenoh"
+version = "1.7.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/82/6d/02042ade4478aee0b63c4cf85ff99018c56349696eac6cc37d67252fd801/eclipse_zenoh-1.7.1.tar.gz", hash = "sha256:32bb0855e847886ea55993fc011ecf60b6f34f8f48a237cfdc69ccfe6bea5f96", size = 160562, upload-time = "2025-12-10T17:36:03.219Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/c0/32/ce79778646bfae19f0f8c7a1ab5be7480e1f4c88e48dc725718712dfe72b/eclipse_zenoh-1.7.1-cp39-abi3-linux_armv6l.whl", hash = "sha256:7b5cdb648a024653d157904c8ce8d99a54c2d988e6ce2d87c82fa76ec8258926", size = 9433970, upload-time = "2025-12-10T17:35:39.107Z" },
+    { url = "https://files.pythonhosted.org/packages/99/57/50e6f5a2f17ee036de8ea94a6df5b09d0b45aa11eaed473da33878ee531b/eclipse_zenoh-1.7.1-cp39-abi3-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl", hash = "sha256:676c627810503450cdf5efdf7a246e1cb95c5e45476e5d4ff393ab4e607a14e5", size = 17498661, upload-time = "2025-12-10T17:35:41.591Z" },
+    { url = "https://files.pythonhosted.org/packages/e0/11/3d9ec6bb6d77883ad1fb37749fc0ffb7cf10c64b7cd6632d0043e6f417f2/eclipse_zenoh-1.7.1-cp39-abi3-macosx_10_12_x86_64.whl", hash = "sha256:b3b1bf7bcdade4ce66132c6893997c9039cc3ea1c10695722fca2aa64da009f2", size = 8902118, upload-time = "2025-12-10T17:35:43.716Z" },
+    { url = "https://files.pythonhosted.org/packages/2f/1e/eadfab7e80c65804f6f8a82b4d776cc9cd9a91e2aa37858ed5ce13aa9ff2/eclipse_zenoh-1.7.1-cp39-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:a8a469141fa4ec792070306d72013c48322aafbcbcfccd11072c8642a89457c7", size = 9289930, upload-time = "2025-12-10T17:35:45.576Z" },
+    { url = "https://files.pythonhosted.org/packages/d5/f4/48225cd4e1fa7415b73ee49e7f37e927172b81693c62b208d0543cc1b394/eclipse_zenoh-1.7.1-cp39-abi3-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:87b412996b26b07dde1f6d263ece70e62831e13e77f744f61cd873cc690b8583", size = 10110810, upload-time = "2025-12-10T17:35:47.573Z" },
+    { url = "https://files.pythonhosted.org/packages/2e/0a/bd97324cde6dbdc698f268b8d99471599356f69451cfc237a7c5b183cdf9/eclipse_zenoh-1.7.1-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d8cb0d8f653c9016d3f4b38177579c005e5288a363c2e3c245bf0e73001b3674", size = 9465190, upload-time = "2025-12-10T17:35:49.839Z" },
+    { url = "https://files.pythonhosted.org/packages/aa/c5/f967340deda1820173b782561bb49dc7b5d7e3bb84f0f7e2ae7779bb5bd8/eclipse_zenoh-1.7.1-cp39-abi3-manylinux_2_28_aarch64.whl", hash = "sha256:798a85267847090b4b459d541e43cf75e587a98e112beebba25f46e18982f1f2", size = 9432520, upload-time = "2025-12-10T17:35:51.943Z" },
+    { url = "https://files.pythonhosted.org/packages/5b/34/755969bebd21247a904c12e1f71c6d96975bd2c18c05960e4d0acac852cc/eclipse_zenoh-1.7.1-cp39-abi3-win_amd64.whl", hash = "sha256:a638331427253d191707f93413ac6955df3ac465b231b85a7098ded7c2a04e2b", size = 7945878, upload-time = "2025-12-10T17:35:54.849Z" },
+    { url = "https://files.pythonhosted.org/packages/a1/e1/c74269ee2381db8fa5819aec541f39a2fc78e5a6db5432e51f40a9d37b0a/eclipse_zenoh-1.7.1-pp310-pypy310_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:15958f6704da2538c48d940b59612a5f06e8a6dcc0a4ff81d3a34e1d8f5775d4", size = 9298216, upload-time = "2025-12-10T17:35:56.253Z" },
+    { url = "https://files.pythonhosted.org/packages/ab/2e/ce9f5f4160d3618e1c2c8c750737b5455d815fd306348197981d0411749c/eclipse_zenoh-1.7.1-pp310-pypy310_pp73-manylinux_2_28_aarch64.whl", hash = "sha256:82de379636d3b516b2955497a9d02021fa773d1b111b84506181a2ffa279d6d6", size = 9425151, upload-time = "2025-12-10T17:35:58.068Z" },
+    { url = "https://files.pythonhosted.org/packages/45/29/b56aa637e713a8e3e8d221ee6391c4163721139324798dccbe9e3d4d176c/eclipse_zenoh-1.7.1-pp39-pypy39_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:92e5e77e448b93d5ccfa60733e583baef3bc5886fd22285bc6eace5265792a29", size = 9285869, upload-time = "2025-12-10T17:35:59.707Z" },
+    { url = "https://files.pythonhosted.org/packages/58/ff/8c8d0f8afe42318e79c902c6478e9c6b3222276d19ce379960898727a6d2/eclipse_zenoh-1.7.1-pp39-pypy39_pp73-manylinux_2_28_aarch64.whl", hash = "sha256:befc3ade7554455886d4d5d0ff0234aad8cf686666a420fca75b5ed2de77517e", size = 9434282, upload-time = "2025-12-10T17:36:01.753Z" },
+]
+
+[[package]]
+name = "pycdr2"
+version = "1.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions", marker = "python_full_version < '3.9'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6c/a0/f3915b7e0c073789a1b01967ebfcfb4491b8b09bd17b671529495f537ecb/pycdr2-1.0.0.tar.gz", hash = "sha256:e2b34aff7e9a536de7b4a2e367d154460d19b6319c1d1d5e068218b0dd539f7c", size = 45986, upload-time = "2022-12-16T12:29:36.124Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/20/2f/13f6562950dbbc9d8b0f2303990dca507e250be3bdaa64ba160fa3d38e54/pycdr2-1.0.0-py3-none-any.whl", hash = "sha256:963e47351128804024dc931deaa3c4f6aea7f3d667ca8d02f61a8fd8411b7fba", size = 53456, upload-time = "2022-12-16T12:29:33.97Z" },
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.13.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f6/37/23083fcd6e35492953e8d2aaaa68b860eb422b34627b13f2ce3eb6106061/typing_extensions-4.13.2.tar.gz", hash = "sha256:e6c81219bd689f51865d9e372991c540bda33a0379d5573cddb9a3a23f7caaef", size = 106967, upload-time = "2025-04-10T14:19:05.416Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8b/54/b1ae86c0973cc6f0210b53d508ca3641fb6d0c56823f288d108bc7ab3cc8/typing_extensions-4.13.2-py3-none-any.whl", hash = "sha256:a439e7c04b49fec3e5d3e2beaa21755cadbbdc391694e28ccdd36ca4a1408f8c", size = 45806, upload-time = "2025-04-10T14:19:03.967Z" },
+]
+
+[[package]]
+name = "zenoh-ros-type"
+version = "0.2.4"
+source = { editable = "." }
+dependencies = [
+    { name = "pycdr2" },
+]
+
+[package.optional-dependencies]
+dev = [
+    { name = "eclipse-zenoh" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "eclipse-zenoh", marker = "extra == 'dev'", specifier = ">=1.7.1,<2.0" },
+    { name = "pycdr2", specifier = ">=1.0,<2.0" },
+]
+provides-extras = ["dev"]
