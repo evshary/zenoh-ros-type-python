@@ -8,6 +8,7 @@ upload:
     uv run --with twine python -m twine upload --verbose --skip-existing dist/*
 
 test:
+    uv sync --extra dev
     uv run python3 tests/test_examples.py
 
 clean:
