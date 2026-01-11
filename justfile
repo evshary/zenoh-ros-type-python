@@ -7,5 +7,8 @@ upload:
     #uv run --with twine python3 -m twine check dist/*
     uv run --with twine python -m twine upload --verbose --skip-existing dist/*
 
+test:
+    uv run python3 tests/test_examples.py
+
 clean:
     rm -rf build dist .venv .ruff_cache zenoh_ros_type.egg-info
