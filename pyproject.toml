@@ -1,6 +1,6 @@
 [project]
 name = "zenoh-ros-type"
-version = "0.2.5"
+version = "0.3.0"
 description = "Common class for ROS 2 message used by Zenoh"
 authors = [
     {name = "ChenYing Kuo", email = "evshary@gmail.com"}
@@ -22,7 +22,7 @@ build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
 dev = [
-  "eclipse-zenoh>=1.7.1,<2.0",
+  "eclipse-zenoh>=1.7.2,<2.0",
   "pytest>=8.3.5",
 ]
 
