@@ -38,9 +38,9 @@ def wait_for_output(proc, pattern, timeout=20):
 
 @pytest.mark.timeout(30)
 def test_pub_sub():
-    listener = run_process([sys.executable, 'zenoh_ros_type/examples/listener.py'])
+    listener = run_process([sys.executable, 'zenoh_ros_type/examples/listener.py', '-l', 'tcp/127.0.0.1:7447', '--no-multicast-scouting'])
     time.sleep(2)  # Wait for listener to start
-    talker = run_process([sys.executable, 'zenoh_ros_type/examples/talker.py'])
+    talker = run_process([sys.executable, 'zenoh_ros_type/examples/talker.py', '-e', 'tcp/127.0.0.1:7447', '--no-multicast-scouting'])
 
     try:
         success, output = wait_for_output(listener, 'Receive: Hello World')
@@ -52,9 +52,9 @@ def test_pub_sub():
 
 @pytest.mark.timeout(30)
 def test_service():
-    server = run_process([sys.executable, 'zenoh_ros_type/examples/service_server.py'])
+    server = run_process([sys.executable, 'zenoh_ros_type/examples/service_server.py', '-l', 'tcp/127.0.0.1:7448', '--no-multicast-scouting'])
     time.sleep(2)  # Wait for server to start
-    client_proc = run_process([sys.executable, 'zenoh_ros_type/examples/service_client.py'])
+    client_proc = run_process([sys.executable, 'zenoh_ros_type/examples/service_client.py', '-e', 'tcp/127.0.0.1:7448', '--no-multicast-scouting'])
 
     try:
         success, output = wait_for_output(client_proc, 'Get result: sum=3')
@@ -66,9 +66,9 @@ def test_service():
 
 @pytest.mark.timeout(60)
 def test_action():
-    server = run_process([sys.executable, 'zenoh_ros_type/examples/action_server.py'])
+    server = run_process([sys.executable, 'zenoh_ros_type/examples/action_server.py', '-l', 'tcp/127.0.0.1:7449', '--no-multicast-scouting'])
     time.sleep(2)  # Wait for server to start
-    client_proc = run_process([sys.executable, 'zenoh_ros_type/examples/action_client.py'])
+    client_proc = run_process([sys.executable, 'zenoh_ros_type/examples/action_client.py', '-e', 'tcp/127.0.0.1:7449', '--no-multicast-scouting'])
 
     try:
         # Action client takes some time as it calculates Fibonacci

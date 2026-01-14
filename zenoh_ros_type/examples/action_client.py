@@ -18,7 +18,7 @@ from zenoh_ros_type import (
 )
 
 
-def main():
+def main(conf: zenoh.Config):
     key_expr = 'fibonacci'
     send_goal_expr = key_expr + '/_action/send_goal'
     # cancel_goal_expr = key_expr + "/_action/cancel_goal"
@@ -26,7 +26,6 @@ def main():
     feedback_expr = key_expr + '/_action/feedback'
     status_expr = key_expr + '/_action/status'
 
-    conf = zenoh.Config()
     with zenoh.open(conf) as session:
         send_goal_client = session.declare_querier(send_goal_expr)
         get_result_client = session.declare_querier(get_result_expr)
@@ -86,4 +85,14 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import argparse
+
+    import common
+
+    parser = argparse.ArgumentParser(prog='action_client', description='zenoh action client example')
+    common.add_config_arguments(parser)
+
+    args = parser.parse_args()
+    conf = common.get_config_from_args(args)
+
+    main(conf)
