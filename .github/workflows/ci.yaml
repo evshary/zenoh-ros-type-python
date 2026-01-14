@@ -43,4 +43,4 @@ jobs:
       - name: Sync dependencies
         run: uv sync --extra dev
       - name: Run tests
-        run: uv run tests/test_examples.py
+        run: uv run pytest
