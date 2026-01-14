@@ -9,7 +9,7 @@ upload:
 
 test:
     uv sync --extra dev
-    uv run pytest
+    uv run pytest tests
 
 clean:
     rm -rf build dist .venv .ruff_cache zenoh_ros_type.egg-info

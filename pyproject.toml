@@ -24,10 +24,17 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = ["zenoh_ros_type"]
 
+# Only for examples
 [project.optional-dependencies]
 dev = [
-  "eclipse-zenoh>=1.7.2,<2.0",
-  "pytest>=8.3.5",
+    "eclipse-zenoh>=1.7.2,<2.0",
+]
+
+# Only for developer tests
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-timeout>=2.4.0",
 ]
 
 # Ruff
