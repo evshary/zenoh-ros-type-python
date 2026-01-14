@@ -10,7 +10,7 @@ import pytest
 def run_process(cmd):
     env = os.environ.copy()
     env['PYTHONUNBUFFERED'] = '1'
-    return subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, preexec_fn=os.setsid, env=env)
+    return subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, preexec_fn=os.setsid, env=env)
 
 
 def kill_process(proc):
