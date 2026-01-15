@@ -5,10 +5,9 @@ import zenoh
 from zenoh_ros_type import String
 
 
-def main():
+def main(conf: zenoh.Config):
     key = 'chatter'
 
-    conf = zenoh.Config()
     with zenoh.open(conf) as session:
 
         def callback(sample):
@@ -24,4 +23,14 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import argparse
+
+    from zenoh_ros_type.examples.common import add_config_arguments, get_config_from_args
+
+    parser = argparse.ArgumentParser(prog='listener', description='zenoh listener example')
+    add_config_arguments(parser)
+
+    args = parser.parse_args()
+    conf = get_config_from_args(args)
+
+    main(conf)

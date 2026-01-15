@@ -39,8 +39,8 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v5
       - name: Set up Python
-        run: uv python install
+        run: uv python install 3.10
       - name: Sync dependencies
         run: uv sync --extra dev
       - name: Run tests
-        run: uv run tests/test_examples.py
+        run: uv run pytest

@@ -5,10 +5,9 @@ import zenoh
 from zenoh_ros_type import AddTwoIntsReply, AddTwoIntsRequest
 
 
-def main():
+def main(conf: zenoh.Config):
     key = 'add_two_ints'
 
-    conf = zenoh.Config()
     with zenoh.open(conf) as session:
 
         def callback(query):
@@ -29,4 +28,14 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    import argparse
+
+    from zenoh_ros_type.examples.common import add_config_arguments, get_config_from_args
+
+    parser = argparse.ArgumentParser(prog='service_server', description='zenoh service server example')
+    add_config_arguments(parser)
+
+    args = parser.parse_args()
+    conf = get_config_from_args(args)
+
+    main(conf)
