@@ -25,12 +25,12 @@ def main(conf: zenoh.Config):
 if __name__ == '__main__':
     import argparse
 
-    import common
+    from zenoh_ros_type.examples.common import add_config_arguments, get_config_from_args
 
     parser = argparse.ArgumentParser(prog='listener', description='zenoh listener example')
-    common.add_config_arguments(parser)
+    add_config_arguments(parser)
 
     args = parser.parse_args()
-    conf = common.get_config_from_args(args)
+    conf = get_config_from_args(args)
 
     main(conf)
