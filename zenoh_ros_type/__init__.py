@@ -1,8 +1,10 @@
 from .action import *  # NOQA
+from .autoware_adapi_msgs import *  # NOQA
 from .autoware_auto_msgs import *  # NOQA
 from .autoware_msgs import *  # NOQA
 from .common_interfaces import *  # NOQA
 from .example_interfaces import *  # NOQA
+from .geographic_info import *  # NOQA
 from .rcl_interfaces import *  # NOQA
 from .rmw_zenoh import *  # NOQA
 from .tier4_autoware_msgs import *  # NOQA
