@@ -21,8 +21,12 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 # We only want to build the zenoh_ros_type package
-[tool.setuptools]
-packages = ["zenoh_ros_type"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["zenoh_ros_type*"]
+exclude = [
+    "zenoh_ros_type.examples*",
+]
 
 # Only for examples
 [project.optional-dependencies]
