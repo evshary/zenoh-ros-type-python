@@ -32,3 +32,9 @@ class Attachment(IdlStruct, typename='Attachment'):
         # \x00\x01\x00\x00 = little-endian, CDR version 1, options 0
         cdr_data = b'\x00\x01\x00\x00' + data
         return super(Attachment, cls).deserialize(cdr_data)
+
+
+@dataclass
+class Empty(IdlStruct, typename='Empty'):
+    # rmw_zenoh does not accept 0-byte payload, requires 1 byte padding
+    padding: uint8 = 0
