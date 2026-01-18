@@ -58,6 +58,13 @@ def add_config_arguments(parser: argparse.ArgumentParser):
         'that can be deserialized to the expected type for the KEY field. '
         "Example: --cfg='transport/unicast/max_links:2'.",
     )
+    parser.add_argument(
+        '--rmw_zenoh',
+        dest='use_rmw_zenoh',
+        default=False,
+        action='store_true',
+        help='Use rmw_zenoh mode instead of zenoh-bridge-ros2dds.',
+    )
 
 
 def get_config_from_args(args) -> zenoh.Config:
