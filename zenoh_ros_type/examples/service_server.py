@@ -2,7 +2,7 @@ import time
 
 import zenoh
 
-from zenoh_ros_type import AddTwoIntsReply, AddTwoIntsRequest
+from zenoh_ros_type import AddTwoIntsReply, AddTwoIntsRequest, Attachment
 
 
 def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
@@ -13,19 +13,26 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
         # Declare liveliness token for rmw_zenoh discovery
         # Format: @ros2_lv/<domain>/<zid>/<nid>/<entity_id>/SS/<ns>/<enclave>/<node>/<service>/<type>/<hash>/<qos>
         # https://github.com/ros2/rmw_zenoh/blob/rolling/docs/design.md#graph-cache
-        liveliness_key = (
-            f'@ros2_lv/0/{str(session.zid())}/0/0/SS/%/%/'
-            f'service_server/%{service}/example_interfaces::srv::dds_::AddTwoInts_/TypeHashNotSupported/::,10:,:,:,,'
-        )
-        _token = session.liveliness().declare_token(liveliness_key)
+        if not use_bridge_ros2dds:
+            _token = session.liveliness().declare_token(
+                f'@ros2_lv/0/{str(session.zid())}/0/0/SS/%/%/service_server/%{service}/example_interfaces::srv::dds_::AddTwoInts_/TypeHashNotSupported/::,10:,:,:,,'
+            )
 
         def callback(query):
             request = AddTwoIntsRequest.deserialize(query.payload.to_bytes())
             print(f'Receive a={request.a}, b={request.b}')
 
+            # rmw_zenoh attachment
+            # Deserialize attachment, re-serialize to update timestamp
+            attachment = None if use_bridge_ros2dds else Attachment.deserialize(query.attachment.to_bytes())
+
             response = AddTwoIntsReply(sum=request.a + request.b)
             print(f'Send back {response.sum}')
-            query.reply(key, response.serialize(), attachment=query.attachment)
+            query.reply(
+                key,
+                response.serialize(),
+                attachment=None if use_bridge_ros2dds else attachment.serialize(),
+            )
 
         session.declare_queryable(key, callback, complete=True)
 
