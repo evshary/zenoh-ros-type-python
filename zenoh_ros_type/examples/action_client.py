@@ -35,7 +35,9 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
         status_expr = f'*/{action}/_action/status/**'
 
     # rmw_zenoh attachment
-    attachment = None if use_bridge_ros2dds else Attachment()
+    send_goal_attachment = None if use_bridge_ros2dds else Attachment()
+    # cancel_goal_attachment = None if use_bridge_ros2dds else Attachment()
+    get_result_attachment = None if use_bridge_ros2dds else Attachment()
 
     with zenoh.open(conf) as session:
         send_goal_client = session.declare_querier(send_goal_expr)
@@ -65,7 +67,7 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
         try:
             recv_handler = send_goal_client.get(
                 payload=req.serialize(),
-                attachment=None if use_bridge_ros2dds else attachment.serialize(),
+                attachment=None if use_bridge_ros2dds else send_goal_attachment.serialize(),
             )
             reply_sample = recv_handler.recv()
             reply = ActionSendGoalResponse.deserialize(reply_sample.ok.payload.to_bytes())
@@ -78,7 +80,7 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
         # try:
         #     recv_handler = cancel_goal_client.get(
         #         payload=req.serialize(),
-        #         attachment=None if use_bridge_ros2dds else attachment.serialize(),
+        #         attachment=None if use_bridge_ros2dds else cancel_goal_attachment.serialize(),
         #     )
         #     reply_sample = recv_handler.recv()
         #     reply = CancelGoalResponse.deserialize(reply_sample.ok.payload.to_bytes())
@@ -95,7 +97,7 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
         try:
             recv_handler = get_result_client.get(
                 payload=req.serialize(),
-                attachment=None if use_bridge_ros2dds else attachment.serialize(),
+                attachment=None if use_bridge_ros2dds else get_result_attachment.serialize(),
             )
             reply_sample = recv_handler.recv()
             reply = FibonacciResult.deserialize(reply_sample.ok.payload.to_bytes())

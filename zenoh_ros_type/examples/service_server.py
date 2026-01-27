@@ -31,7 +31,7 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
             query.reply(
                 key,
                 response.serialize(),
-                attachment=None if use_bridge_ros2dds else attachment.serialize(),
+                attachment=None if use_bridge_ros2dds else attachment.serialize(increase=False),
             )
 
         session.declare_queryable(key, callback, complete=True)

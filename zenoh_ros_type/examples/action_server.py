@@ -33,9 +33,6 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
         feedback_expr = f'*/{action}/_action/feedback/**'
         status_expr = f'*/{action}/_action/status/**'
 
-    # rmw_zenoh attachment
-    attachment = None if use_bridge_ros2dds else Attachment()
-
     # Queue for handling goals
     goals = Queue()
 
@@ -69,6 +66,10 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
         feedback_publisher = session.declare_publisher(feedback_expr)
         status_publisher = session.declare_publisher(status_expr)
 
+        # rmw_zenoh attachment
+        feedback_attachment = None if use_bridge_ros2dds else Attachment()
+        status_attachment = None if use_bridge_ros2dds else Attachment()
+
         # Dictionaries mapping goal_id to GoalStatus, results, and queries waiting for results
         status_dict = {}
         result_dict = {}
@@ -96,7 +97,7 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
             # Publish the updated status list
             status_publisher.put(
                 GoalStatusArray(status_list=list(status_dict.values())).serialize(),
-                attachment=None if use_bridge_ros2dds else attachment.serialize(),
+                attachment=None if use_bridge_ros2dds else status_attachment.serialize(),
             )
 
             # Check and reply to any pending result queries if the goal is completed
@@ -134,7 +135,7 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
             query.reply(
                 send_goal_expr,
                 send_goal_response.serialize(),
-                attachment=None if use_bridge_ros2dds else query_attachment.serialize(),
+                attachment=None if use_bridge_ros2dds else query_attachment.serialize(increase=False),
             )
 
             # Add the goal to the queue
@@ -161,7 +162,7 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
                 query.reply(
                     get_result_expr,
                     result.serialize(),
-                    attachment=None if use_bridge_ros2dds else query_attachment.serialize(),
+                    attachment=None if use_bridge_ros2dds else query_attachment.serialize(increase=False),
                 )
             else:
                 # Otherwise, store the query and attachment to reply later when the goal is completed
@@ -201,7 +202,7 @@ def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
                     )
                     feedback_publisher.put(
                         feedback.serialize(),
-                        attachment=None if use_bridge_ros2dds else attachment.serialize(),
+                        attachment=None if use_bridge_ros2dds else feedback_attachment.serialize(),
                     )
                     result_dict[goad_id] = sequence[:]
                     time.sleep(1)
