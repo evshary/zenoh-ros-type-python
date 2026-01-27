@@ -1,4 +1,6 @@
-from dataclasses import dataclass
+import time
+import uuid
+from dataclasses import dataclass, field
 
 from pycdr2 import IdlStruct
 from pycdr2.types import array, int64, uint8
@@ -15,14 +17,24 @@ class Attachment(IdlStruct, typename='Attachment'):
     - gid: 16 bytes
 
     Source: https://github.com/ros2/rmw_zenoh/blob/humble/docs/design.md
+
+    Usage:
+        attachment = Attachment()
+        data = attachment.serialize()  # auto increment sequence_number and timestamp
+        data = attachment.serialize(increase=False)  # only update timestamp
     """
 
-    sequence_number: int64
-    timestamp_ns: int64
-    gid_length: uint8
-    gid: array[uint8, 16]
+    sequence_number: int64 = field(default=0)
+    timestamp_ns: int64 = field(default=0)
+    gid_length: uint8 = 16
+    gid: array[uint8, 16] = field(default_factory=lambda: list(uuid.uuid4().bytes))
 
-    def serialize(self) -> bytes:
+    def serialize(self, increase: bool = True) -> bytes:
+        # Optionally increment sequence number
+        if increase:
+            self.sequence_number += 1
+        # Auto-update timestamp on serialize
+        self.timestamp_ns = time.time_ns()
         # Strip the 4-byte CDR header added by pycdr2 (rmw_zenoh expects raw bytes)
         return super().serialize()[4:]
 

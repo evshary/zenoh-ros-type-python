@@ -11,6 +11,7 @@ from zenoh_ros_type import (
     # Time,
     ActionResultRequest,
     ActionSendGoalResponse,
+    Attachment,
     FibonacciFeedback,
     FibonacciResult,
     FibonacciSendGoal,
@@ -18,13 +19,25 @@ from zenoh_ros_type import (
 )
 
 
-def main(conf: zenoh.Config):
-    key_expr = 'fibonacci'
-    send_goal_expr = key_expr + '/_action/send_goal'
-    # cancel_goal_expr = key_expr + "/_action/cancel_goal"
-    get_result_expr = key_expr + '/_action/get_result'
-    feedback_expr = key_expr + '/_action/feedback'
-    status_expr = key_expr + '/_action/status'
+def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
+    action = 'fibonacci'
+    if use_bridge_ros2dds:
+        send_goal_expr = action + '/_action/send_goal'
+        # cancel_goal_expr = action + '/_action/cancel_goal'
+        get_result_expr = action + '/_action/get_result'
+        feedback_expr = action + '/_action/feedback'
+        status_expr = action + '/_action/status'
+    else:
+        send_goal_expr = f'*/{action}/_action/send_goal/**'
+        # cancel_goal_expr = f'*/{action}/_action/cancel_goal/**'
+        get_result_expr = f'*/{action}/_action/get_result/**'
+        feedback_expr = f'*/{action}/_action/feedback/**'
+        status_expr = f'*/{action}/_action/status/**'
+
+    # rmw_zenoh attachment
+    send_goal_attachment = None if use_bridge_ros2dds else Attachment()
+    # cancel_goal_attachment = None if use_bridge_ros2dds else Attachment()
+    get_result_attachment = None if use_bridge_ros2dds else Attachment()
 
     with zenoh.open(conf) as session:
         send_goal_client = session.declare_querier(send_goal_expr)
@@ -52,7 +65,10 @@ def main(conf: zenoh.Config):
         goal_id = uuid4().bytes  # Generate a random UUID
         req = FibonacciSendGoal(goal_id=UUID(uuid=goal_id), goal=10)
         try:
-            recv_handler = send_goal_client.get(payload=req.serialize())
+            recv_handler = send_goal_client.get(
+                payload=req.serialize(),
+                attachment=None if use_bridge_ros2dds else send_goal_attachment.serialize(),
+            )
             reply_sample = recv_handler.recv()
             reply = ActionSendGoalResponse.deserialize(reply_sample.ok.payload.to_bytes())
             print(f'The result of SendGoal: {reply.accept}')
@@ -62,7 +78,10 @@ def main(conf: zenoh.Config):
         # # Cancel goal client
         # req = CancelGoalRequest(goal_info=GoalInfo(goal_id=UUID(uuid=goal_id), stamp=Time(sec=0, nanosec=0)))
         # try:
-        #     recv_handler = cancel_goal_client.get(payload=req.serialize())
+        #     recv_handler = cancel_goal_client.get(
+        #         payload=req.serialize(),
+        #         attachment=None if use_bridge_ros2dds else cancel_goal_attachment.serialize(),
+        #     )
         #     reply_sample = recv_handler.recv()
         #     reply = CancelGoalResponse.deserialize(reply_sample.ok.payload.to_bytes())
         #     for goal in reply.goals_canceling:
@@ -75,8 +94,11 @@ def main(conf: zenoh.Config):
 
         # Get result client
         req = ActionResultRequest(goal_id=UUID(uuid=goal_id))
-        recv_handler = get_result_client.get(payload=req.serialize())
         try:
+            recv_handler = get_result_client.get(
+                payload=req.serialize(),
+                attachment=None if use_bridge_ros2dds else get_result_attachment.serialize(),
+            )
             reply_sample = recv_handler.recv()
             reply = FibonacciResult.deserialize(reply_sample.ok.payload.to_bytes())
             print(f'The result: {reply.status} {reply.sequence}')
@@ -95,4 +117,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     conf = get_config_from_args(args)
 
-    main(conf)
+    main(conf, use_bridge_ros2dds=not args.use_rmw_zenoh)

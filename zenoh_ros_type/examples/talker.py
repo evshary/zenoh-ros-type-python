@@ -2,11 +2,15 @@ import time
 
 import zenoh
 
-from zenoh_ros_type import String
+from zenoh_ros_type import Attachment, String
 
 
-def main(conf: zenoh.Config):
-    key = 'chatter'
+def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
+    topic = 'chatter'
+    key = topic if use_bridge_ros2dds else f'*/{topic}/**'
+
+    # rmw_zenoh attachment
+    attachment = None if use_bridge_ros2dds else Attachment()
 
     with zenoh.open(conf) as session:
         publisher = session.declare_publisher(key)
@@ -17,7 +21,10 @@ def main(conf: zenoh.Config):
                 data = f'Hello World {cnt}!'
                 print(f'Publish: {data}')
                 msg = String(data=data)
-                publisher.put(msg.serialize())
+                publisher.put(
+                    msg.serialize(),
+                    attachment=None if use_bridge_ros2dds else attachment.serialize(),
+                )
 
                 time.sleep(1)
                 cnt += 1
@@ -36,4 +43,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     conf = get_config_from_args(args)
 
-    main(conf)
+    main(conf, use_bridge_ros2dds=not args.use_rmw_zenoh)

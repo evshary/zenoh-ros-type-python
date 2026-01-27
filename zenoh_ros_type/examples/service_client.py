@@ -1,12 +1,16 @@
 import zenoh
 
-from zenoh_ros_type import AddTwoIntsReply, AddTwoIntsRequest
+from zenoh_ros_type import AddTwoIntsReply, AddTwoIntsRequest, Attachment
 
 
-def main(conf: zenoh.Config):
+def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
     a = 1
     b = 2
-    key = 'add_two_ints'
+    service = 'add_two_ints'
+    key = service if use_bridge_ros2dds else f'*/{service}/**'
+
+    # rmw_zenoh attachment
+    attachment = None if use_bridge_ros2dds else Attachment()
 
     with zenoh.open(conf) as session:
         client = session.declare_querier(key)
@@ -15,7 +19,10 @@ def main(conf: zenoh.Config):
         req = AddTwoIntsRequest(a=a, b=b)
 
         try:
-            recv_handler = client.get(payload=req.serialize())
+            recv_handler = client.get(
+                payload=req.serialize(),
+                attachment=None if use_bridge_ros2dds else attachment.serialize(),
+            )
             reply_sample = recv_handler.recv()
 
             reply = AddTwoIntsReply.deserialize(reply_sample.ok.payload.to_bytes())
@@ -35,4 +42,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     conf = get_config_from_args(args)
 
-    main(conf)
+    main(conf, use_bridge_ros2dds=not args.use_rmw_zenoh)

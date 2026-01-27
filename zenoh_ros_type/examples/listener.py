@@ -5,8 +5,9 @@ import zenoh
 from zenoh_ros_type import String
 
 
-def main(conf: zenoh.Config):
-    key = 'chatter'
+def main(conf: zenoh.Config, use_bridge_ros2dds: bool = True):
+    topic = 'chatter'
+    key = topic if use_bridge_ros2dds else f'*/{topic}/**'
 
     with zenoh.open(conf) as session:
 
@@ -33,4 +34,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     conf = get_config_from_args(args)
 
-    main(conf)
+    main(conf, use_bridge_ros2dds=not args.use_rmw_zenoh)
