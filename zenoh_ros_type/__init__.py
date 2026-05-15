@@ -1,6 +1,7 @@
 from .action import *  # NOQA
 from .autoware_adapi_msgs import *  # NOQA
 from .autoware_auto_msgs import *  # NOQA
+from .autoware_internal_msgs import *  # NOQA
 from .autoware_msgs import *  # NOQA
 from .common_interfaces import *  # NOQA
 from .example_interfaces import *  # NOQA
